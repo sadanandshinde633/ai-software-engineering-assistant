@@ -1,12 +1,13 @@
+
 const cors = require("cors");
 const express = require("express");
 const { randomUUID } = require("node:crypto");
 
 const app = express();
+const PORT = 5000;
+
 app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.json());
-app.use(express.json());
-const PORT = 5000;
 
 app.get("/api/health", (req, res) => {
   res.json({
@@ -27,14 +28,14 @@ app.post("/api/tasks", (req, res) => {
 
   const requestId = randomUUID();
 
-res.status(201).json({
-  success: true,
-  requestId,
-  status: "received",
-  createdAt: new Date().toISOString(),
-  message: "Task received successfully.",
-  task: task.trim(),
-});
+  res.status(201).json({
+    success: true,
+    requestId,
+    status: "received",
+    createdAt: new Date().toISOString(),
+    message: "Task received successfully.",
+    task: task.trim(),
+  });
 });
 
 app.listen(PORT, () => {
